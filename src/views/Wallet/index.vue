@@ -39,12 +39,12 @@
             v-for="transaction in this[activeFilter]",
             :key="transaction.id",
           )
-            span.col-12.col-sm-3.col-md-3.transaction__date {{transaction.createdAt | parseDate}}
-            span.col-12.col-sm-6.col-md-6.transaction__name {{transaction.name}}
-            span.col-12.col-sm-3.col-md-2.transaction__amount(
+            p.col-12.col-sm-3.col-md-3.transaction__date.d-block.d-sm-inline-flex.py-2 {{transaction.createdAt | parseDate}}
+            p.col-12.col-sm-6.col-md-6.transaction__name.d-block.d-sm-inline-flex {{transaction.name}}
+            p.col-12.col-sm-3.col-md-2.transaction__amount.d-block.d-sm-inline-flex(
               v-bind:class="transaction.amount > 0 ? 'c-green' : 'c-red'",
             ) {{transaction.amount | parseMoney}}
-            span.col-12.col-md-1.text-right.d-none.d-md-inline-flex.justify-content-end
+            p.col-12.col-md-1.text-right.d-none.d-md-inline-flex.justify-content-end
               button
                 img(src="~assets/more.svg", alt="Wallet: InventiStudio recruitment task")
 </template>
@@ -115,6 +115,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+  @import ../../styles/vars/_colors.sass
   .fade-enter-active, .fade-leave-active 
     transition: opacity .5s
   .fade-enter, .fade-leave-to
@@ -149,4 +150,8 @@ export default {
       color: green
     &.withdrawal 
       color: red
+  .sort-button
+    transition: color .4s
+    &:hover
+      color: $c-blue
 </style>
