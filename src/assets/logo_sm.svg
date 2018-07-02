@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 245 50">
+  <defs>
+    <style>.a{fill:rgba(0,0,0,0);}.b{fill:#57b6ff;}.c{fill:#3692d8;}.d{fill:#4b4b4b;}</style>
+  </defs>
+  <rect class="a" width="69" height="50"/>
+  <path class="b" d="M15.6,0H34.5L9.452,50,0,31.132Z" transform="translate(34.5)"/>
+  <path class="c" d="M25.048,50,0,0H18.9L34.5,31.132Z"/>
+  <g transform="translate(99 15)">
+    <rect class="a" width="146" height="20"/>
+    <path class="d" d="M36.172,19.3h-4.98L38.284,0h4.382L49.81,19.295H44.8l-1.129-3.6H37.288l-1.116,3.6Zm4.3-13.89L38.4,12.1h4.156ZM18.9,19.3H14.063l-2.59-11-2.536,11H4.117L0,0H4.634L6.852,12.1,9.508,0h3.957l2.7,12.1L18.379,0H23L18.9,19.3Zm100.456,0H106.033V0h13.345V3.592h-8.685V7.66h7.33v3.459h-7.33v4.6h8.658V19.3Zm-23.729,0H82.848V0h4.661V15.718h8.114V19.3Zm-23.186,0H59.663V0h4.661V15.718h8.113V19.3Zm66.634,0h-4.661V3.592h-5.7V0h16.161V3.592h-5.8V19.3Z" transform="translate(0.45 0.703)"/>
+  </g>
+</svg>

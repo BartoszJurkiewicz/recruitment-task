@@ -5,7 +5,9 @@
         .col-12.text-center
           img.sign-in__logo.d-inline-block(src="~assets/logo.svg", alt="Wallet: InventiStudio recruitment task")
         .col-12.col-md-7.col-lg-5.col-xl-4
-          form
+          form(
+            @submit.prevent="signIn()"
+          )
             label.fs-11.mb-8 E-mail address
             input.o-input.mb-16(
               v-model.trim="email",
@@ -18,12 +20,12 @@
               type="password",
               placeholder="Your pass****",
             )
-          button.o-btn.bg-blue.mt-40.w-100(
-            @click="signIn()",
-            :disabled="$v.$error",
-            type="button",
-          )
-            span.fs-16.c-white Sign in
+            button.o-btn.bg-blue.mt-40.w-100(
+              @click="signIn()",
+              :disabled="$v.$error",
+              type="submit",
+            )
+              span.fs-16.c-white Sign in
 </template>
 
 <script>
