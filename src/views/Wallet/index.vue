@@ -19,20 +19,20 @@
     .container
       .row
         ul.col-12.list-group.transactions__list
-          li.row.list-group-item.transaction__item__titles.d-none.d-md-block
-            span.col-12.col-md-3 Added at
-            span.col-12.col-md-5 Title
-            span.col-12.col-md-2 Amount
+          li.row.list-group-item.transaction__item__titles.d-none.d-sm-block
+            span.col-12.col-sm-3.col-md-3 Added at
+            span.col-12.col-sm-6.col-md-6 Title
+            span.col-12.col-sm-3.col-md-3 Amount
           li.row.list-group-item.list-group-item-light.transaction(
             v-for="transaction in this[activeFilter]"
             :key="transaction.id"
           )
-            span.col-12.col-md-3.transaction__date {{transaction.createdAt | parseDate}}
-            span.col-12.col-md-5.transaction__name {{transaction.name}}
-            span.col-12.col-md-3.transaction__amount(
+            span.col-12.col-sm-3.col-md-3.transaction__date {{transaction.createdAt | parseDate}}
+            span.col-12.col-sm-6.col-md-6.transaction__name {{transaction.name}}
+            span.col-12.col-sm-3.col-md-2.transaction__amount(
               v-bind:class="transaction.amount > 0 ? 'c-green' : 'c-red'"
             ) {{transaction.amount | parseMoney}}
-            span.col-12.col-md-1.text-right
+            span.col-12.col-md-1.text-right.d-none.d-md-inline-flex.justify-content-end
               button
                 img(src="~assets/more.svg", alt="Wallet: InventiStudio recruitment task")
 </template>
