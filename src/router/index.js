@@ -13,8 +13,8 @@ const routes = [
   {
     path: 'wallet',
     name: 'Wallet',
-    component: () => import(/* webpackChunkName: "wallet" */ 'src/views/Wallet')
-  }
+    component: () => import(/* webpackChunkName: "wallet" */ 'src/views/Wallet'),
+  },
 ]
 
 const router = new Router({

@@ -55,9 +55,6 @@
       email: { required, email },
       password: { required },
     },
-    mounted () {
-      this.login({email: 'john.doe@mail.com', password: 'password'})
-    }
   }
 </script>
 

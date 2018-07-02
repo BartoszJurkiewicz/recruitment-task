@@ -1,1 +1,2 @@
-export const STORAGE_AUTH_TOKEN = 'wallet-auth-token'
+const STORAGE_AUTH_TOKEN = 'wallet-auth-token'
+export default STORAGE_AUTH_TOKEN
