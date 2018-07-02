@@ -22,12 +22,12 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-  @import ../../styles/vars/_colors.sass
-  .header 
-    margin-top: 20px
-    margin-bottom: 58px
-    .header__button
-      transition: color .4s
-      &:hover
-        color: $c-blue
+@import ../../styles/vars/_colors.sass
+.header 
+  margin-top: 20px
+  margin-bottom: 58px
+  .header__button
+    transition: color .4s
+    &:hover
+      color: $c-blue
 </style>
