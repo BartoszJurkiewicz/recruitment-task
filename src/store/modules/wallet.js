@@ -13,7 +13,7 @@ const mutations = {
 const actions = {
   async getTransactions({ commit }) {
     await api.get('/transactions')
-    .then(res => commit('SET_TRANSACTIONS', res.data.data))
+    .then(res => commit('SET_TRANSACTIONS', res.data.data.sort((a, b) => a.createdAt < b.createdAt)))
   },
 }
 

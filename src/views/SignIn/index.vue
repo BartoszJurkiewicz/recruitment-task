@@ -13,6 +13,7 @@
               v-model.trim="email",
               type="email",
               placeholder="john.doe@mail.com",
+              v-focus=""
             )
             label.fs-11.mb-8 Password
             input.o-input.mb-16(
@@ -54,6 +55,11 @@
     validations: {
       email: { required, email },
       password: { required },
+    },
+    directives: {
+      focus: {
+        inserted: el => el.focus(),
+      },
     },
   }
 </script>

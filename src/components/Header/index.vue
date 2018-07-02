@@ -4,8 +4,8 @@
       img.header__logo(src="~assets/logo_sm.svg", alt="Wallet: InventiStudio recruitment task")
     .col-6.col-sm-8.col-md-9.text-right
       button.c-black.header__button(
-        @click="logOut()"
-        type="button"
+        @click="logOut()",
+        type="button",
       )
         span Sign out
 </template>

@@ -9,28 +9,40 @@
       .col-xs-12.col-md
         .filters.d-flex.justify-content-center.justify-content-md-end.btn-group
           button.btn(
-            type="button"
-            @click="activeFilter=filter"
-            v-for="filter in filters"
-            :key="filter"
-            :class="filter == activeFilter ? 'bg-blue' : 'btn-light'"
+            type="button",
+            @click="activeFilter=filter",
+            v-for="filter in filters",
+            :key="filter",
+            :class="filter == activeFilter ? 'bg-blue' : 'btn-light'",
           )
             span {{filter | capitalize}}
     .container
       .row
         ul.col-12.list-group.transactions__list
           li.row.list-group-item.transaction__item__titles.d-none.d-sm-block
-            span.col-12.col-sm-3.col-md-3 Added at
-            span.col-12.col-sm-6.col-md-6 Title
-            span.col-12.col-sm-3.col-md-3 Amount
-          li.row.list-group-item.list-group-item-light.transaction(
-            v-for="transaction in this[activeFilter]"
-            :key="transaction.id"
+            button.col-12.col-sm-3.sort-button.text-left.c-black.d-inline-flex.align-items-center(
+              v-for="sortOption in sortOptions",
+              :key="sortOption.slug",
+              :class="[`col-md-${sortOption.width}`, `col-sm-${sortOption.width}`]",
+              @click="sort(sortOption.slug)",
+              type="button",
+            ) 
+              strong {{sortOption.name}}
+              transition(
+                name="fade",
+              )
+                span.chevron(
+                  v-if="activeSort == sortOption.slug",
+                  :class="order ? 'chevron--down' : 'chevron--up'",
+                )
+          li.row.list-group-item.list-group-item-light.transaction.py-20(
+            v-for="transaction in this[activeFilter]",
+            :key="transaction.id",
           )
             span.col-12.col-sm-3.col-md-3.transaction__date {{transaction.createdAt | parseDate}}
             span.col-12.col-sm-6.col-md-6.transaction__name {{transaction.name}}
             span.col-12.col-sm-3.col-md-2.transaction__amount(
-              v-bind:class="transaction.amount > 0 ? 'c-green' : 'c-red'"
+              v-bind:class="transaction.amount > 0 ? 'c-green' : 'c-red'",
             ) {{transaction.amount | parseMoney}}
             span.col-12.col-md-1.text-right.d-none.d-md-inline-flex.justify-content-end
               button
@@ -48,12 +60,23 @@ export default {
     return {
       activeFilter: 'all',
       filters: ['all', 'withdrawal', 'additions'],
-      activeSort: '',
+      sortOptions: [
+        { slug: 'createdAt', name: 'Added at', width: 3 },
+        { slug: 'name', name: 'Title', width: 6 },
+        { slug: 'amount', name: 'Amount', width: 3 },
+      ],
+      activeSort: 'createdAt',
+      order: true,
     }
   },
   components: { AppHeader },
   computed: {
-    all() { return this.$store.state.wallet.transactions },
+    all: {
+      get() { return this.$store.state.wallet.transactions },
+      set(transactions) {
+        this.$store.commit('wallet/SET_TRANSACTIONS', transactions)
+      },
+    },
     ...mapGetters({
       balance: 'wallet/balance',
       withdrawal: 'wallet/withdrawalTransactions',
@@ -64,6 +87,15 @@ export default {
     ...mapActions({
       getTransactions: 'wallet/getTransactions',
     }),
+    sort(sort) {
+      const localTransactions = this.all.slice(0)
+      const sortAsc = (a, b) => a[sort] > b[sort]
+      const sortDesc = (a, b) => a[sort] < b[sort]
+      localTransactions.sort(this.order ? sortAsc : sortDesc)
+      this.all = localTransactions
+      this.order = !this.order
+      this.activeSort = sort
+    },
   },
   filters: {
     capitalize(str) {
@@ -83,12 +115,28 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+  .fade-enter-active, .fade-leave-active 
+    transition: opacity .5s
+  .fade-enter, .fade-leave-to
+    opacity: 0
   .filters 
     list-style-type: none
     .btn.bg-blue
       color: white
   .transactions__list 
     padding-left: 15px
+    .chevron
+      width: 0
+      height: 0
+      margin-left: 1rem
+      border-left: 5px solid transparent
+      border-right: 5px solid transparent
+      border-bottom: 5px solid black
+      transition: .2s
+      &.active 
+        border-color: blue
+      &.chevron--down
+        transform: rotate(180deg)
   .transaction__item__titles 
     font-weight: bold
   .list-group-item 
