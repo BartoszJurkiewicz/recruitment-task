@@ -40,11 +40,12 @@ const actions = {
   },
   async logout({commit}) {
     try {
-      await api.delete(`/sessions/${ls.get(STORAGE_AUTH_TOKEN)}`)
-      .then(() => {
-        commit('LOGOUT')
-        router.push({ name: 'SignIn' })
-      })
+      const lsToken = ls.get(STORAGE_AUTH_TOKEN)
+      if (lsToken) await api.delete(`/sessions/${lsToken}`)
+      ls.remove(STORAGE_AUTH_TOKEN)
+      api.setHeader('x-auth-token', null)
+      commit('LOGOUT')
+      router.push({ name: 'SignIn' })
     } catch (err) {
       throw err
     }
